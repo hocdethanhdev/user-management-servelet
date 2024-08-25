@@ -1,0 +1,117 @@
+<%-- 
+    Document   : login
+    Created on : Jan 24, 2024, 10:10:20 AM
+    Author     : ADMIN
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Login Page</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+            }
+            .container {
+                width: 400px;
+                margin: 100px auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            }
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+            form {
+                margin-top: 20px;
+                text-align: center; 
+            }
+            label {
+                display: inline-block;
+                width: 100px; 
+                text-align: right; 
+            }
+            input[type="text"],
+            input[type="password"] {
+                margin-left: 30px;
+                width: 200px;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box; 
+                font-style: italic;
+            }
+            input[type="submit"],
+            input[type="reset"] {
+                width: 100px; 
+                padding: 10px;
+                border: none;
+                background-color: #4CAF50;
+                color: white;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-top: 10px; 
+                font-size: 14px; 
+            }
+            input[type="submit"]:hover,
+            input[type="reset"]:hover {
+                background-color: #45a049;
+            }
+            input[type="reset"] {
+                background-color: #f44336;
+            }
+            input[type="reset"]:hover {
+                background-color: #da190b;
+            }
+
+            p{
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Login</h1>
+            <form action="MainController" method="POST">
+                <label for="userID">User ID</label>
+                <input type="text" id="userID" name="userID" required><br>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <div class="g-recaptcha" data-sitekey="6LdozJUpAAAAAEzSDyzC7-q5NWZkdYVGnhsBI90T"></div><br><br>
+                <div style="color:red" id="error1"></div>
+
+                <input type="submit" name="action" value="Login" onclick="return checkCaptcha();">
+                <input type="reset" value="Reset">
+            </form>
+            <p style="color: red">${requestScope.ERROR}</p>
+        </div>
+
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script type="text/javascript">
+                   function checkCaptcha() {
+                       var error1 = document.getElementById("error1");
+                       var response = grecaptcha.getResponse();
+
+                       if (response) {
+                           return true; // Allow form submission
+                       } else {
+                           error1.textContent = "Please verify that you are not a robot.";
+                           return false; // Prevent form submission
+                       }
+                   }
+        </script> 
+    </body>
+
+</html>
